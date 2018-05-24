@@ -2,7 +2,7 @@ import processSnapshots from '../../../utils/snapshots';
 import %COMPONENT%, { I%COMPONENT%Props } from './%COMPONENT%';
 
 const snapshots = [
-  { props: {} }
+  { props: {children: 'test'} }
 ];
 
 processSnapshots<I%COMPONENT%Props>(%COMPONENT%, snapshots);

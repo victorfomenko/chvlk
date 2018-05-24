@@ -7,16 +7,14 @@ export interface I%COMPONENT%Props {
 }
 
 // remove if don't need
-interface I%COMPONENT%State {
-
-}
+// interface I%COMPONENT%State {}
 
 const %COMPONENT%Wrapper = styled.div`
   color: ${({ theme }: { theme: IStyledTheme }): string => theme.colors.main};
 `;
 
 // replace I%COMPONENT%State with undefined, if don't need state
-export class %COMPONENT% extends React.PureComponent<I%COMPONENT%Props, I%COMPONENT%State> {
+export class %COMPONENT% extends React.PureComponent<I%COMPONENT%Props, {}> {
   public static displayName: string = '%COMPONENT%';
 
   public render(): JSX.Element {

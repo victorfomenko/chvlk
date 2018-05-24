@@ -3,7 +3,7 @@ import mount from '../../../utils/mount';
 import %COMPONENT% from './';
 
 test('%COMPONENT% should have at least one functional test', () => {
-  mount(<%COMPONENT% />);
+  mount(<%COMPONENT%>test</%COMPONENT%>);
 
   expect(true).toEqual(false);
 });

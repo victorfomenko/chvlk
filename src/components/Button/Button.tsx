@@ -26,7 +26,7 @@ const ButtonElement = styled.button`
   }
 `;
 
-export class Button extends React.PureComponent<IButtonProps, undefined> {
+export class Button extends React.PureComponent<IButtonProps, {}> {
   public static displayName: string = 'Button';
 
   public render(): JSX.Element {
