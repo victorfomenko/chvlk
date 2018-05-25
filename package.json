@@ -22,10 +22,7 @@
   },
   "author": "Oleg Repin <iamolegga@gmail.com> (https://github.com/iamolegga)",
   "license": "MIT",
-  "dependencies": {
-    "react-test-renderer": "^16.3.2",
-    "styled-components": "^3.2.6"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/enzyme": "^3.1.10",
     "@types/enzyme-adapter-react-16": "^1.0.2",
@@ -51,6 +48,7 @@
     "react-styleguidist": "5.4.4",
     "semantic-release": "6.3.6",
     "source-map-loader": "0.2.1",
+    "styled-components": "^3.3.0",
     "ts-jest": "20.0.6",
     "tslint": "^5.10.0",
     "tslint-config-prettier": "^1.13.0",
