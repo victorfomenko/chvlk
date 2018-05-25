@@ -1,5 +1,8 @@
-import { shallow, ShallowWrapper } from 'enzyme';
+import { configure, shallow, ShallowWrapper } from 'enzyme';
+import * as ReactSixteenAdapter from 'enzyme-adapter-react-16';
 import * as React from 'react';
+
+configure({ adapter: new ReactSixteenAdapter() });
 
 export type IGetTarget = (
   tree: ShallowWrapper<any, any>
