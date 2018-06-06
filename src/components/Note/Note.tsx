@@ -13,7 +13,10 @@ export interface INoteProps {
 interface INoteState {
   readonly isOpen: boolean;
 }
-interface ITriangleProps { isOpen: boolean; [k: string]: any }
+interface ITriangleProps {
+  readonly isOpen: boolean;
+  readonly [k: string]: any;
+}
 
 export class Note extends React.PureComponent<INoteProps, INoteState> {
   public static displayName: string = 'Note';
