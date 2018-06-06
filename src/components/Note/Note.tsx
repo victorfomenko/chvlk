@@ -13,6 +13,7 @@ export interface INoteProps {
 interface INoteState {
   readonly isOpen: boolean;
 }
+interface ITriangleProps { isOpen: boolean; [k: string]: any }
 
 export class Note extends React.PureComponent<INoteProps, INoteState> {
   public static displayName: string = 'Note';
@@ -112,15 +113,14 @@ const StyledInfoIcon = styled(InfoIcon)`
   height: 16px;
 `;
 
-const StyledTriangleIcon = styled(
-  ({ isOpen: _, ...other }: { isOpen: boolean; [k: string]: any }) =>
-    <TriangleIcon {...other} />
+const StyledTriangleIcon = styled(({ isOpen: _, ...other }: ITriangleProps) =>
+  <TriangleIcon {...other} />
 )`
   display: inline-block;
   width: 10px;
   height: 4px;
   transition: transform 0.2s ease-in-out;
-  transform: ${({ isOpen }: { isOpen: boolean }) =>
+  transform: ${({ isOpen }: ITriangleProps) =>
     isOpen ? 'rotate(0deg)' : 'rotate(180deg)'};
 `;
 
