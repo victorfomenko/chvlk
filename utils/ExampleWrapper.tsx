@@ -1,6 +1,7 @@
 import { ThemeProvider } from 'emotion-theming';
 import * as React from 'react';
 import theme from '../src/themes/default';
+import './globalStyles';
 
 export interface IWrapperProps {
   children: any;
