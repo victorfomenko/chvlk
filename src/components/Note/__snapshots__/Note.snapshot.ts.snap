@@ -10,7 +10,7 @@ exports[`Note snapshots 1`] = `
       <Styled(span)>
         Hide help
       </Styled(span)>
-      <Styled(triangle.svg)
+      <Styled(Component)
         isOpen={true}
       />
     </Styled(div)>

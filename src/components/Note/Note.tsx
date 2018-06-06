@@ -111,13 +111,17 @@ const StyledInfoIcon = styled(InfoIcon)`
   width: 16px;
   height: 16px;
 `;
-const StyledTriangleIcon = styled(TriangleIcon)`
+
+const StyledTriangleIcon = styled(
+  ({ isOpen: _, ...other }: { isOpen: boolean; [k: string]: any }) =>
+    <TriangleIcon {...other} />
+)`
   display: inline-block;
   width: 10px;
   height: 4px;
+  transition: transform 0.2s ease-in-out;
   transform: ${({ isOpen }: { isOpen: boolean }) =>
     isOpen ? 'rotate(0deg)' : 'rotate(180deg)'};
-  transition: transform 0.2s ease-in-out;
 `;
 
 export default Note;
