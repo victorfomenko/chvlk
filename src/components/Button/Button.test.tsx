@@ -1,5 +1,5 @@
 import * as React from 'react';
-import mount from '../../../utils/mount';
+import { mount } from '../../../utils/render';
 import Button from './';
 
 test('Button should call onClick once', () => {
