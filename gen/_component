@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from '../../../utils/styled';
+import styled from 'react-emotion';
 import { IStyledTheme } from '../../themes';
 
 export interface I%COMPONENT%Props {
@@ -22,7 +22,7 @@ export class %COMPONENT% extends React.PureComponent<I%COMPONENT%Props, {}> {
   }
 }
 
-const %COMPONENT%Wrapper = styled.div`
+const %COMPONENT%Wrapper = styled('div')`
   color: ${({ theme }: { theme: IStyledTheme }): string => theme.colors.main};
 `;
 
