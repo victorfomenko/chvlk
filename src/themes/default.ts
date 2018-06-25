@@ -20,7 +20,7 @@ const colors = {
   textControlDefault: '#4F5F6F',
   textControlDisabled: '#C8CFD5',
   textErrorColor: '#E50000',
-  textPrimaryColor: '#2A3642',
+  textPrimaryColor: '#4f5f6f',
   textSecondaryColor: '#8293A3',
   textSecondaryColorHover: '#5C6E7E',
 };

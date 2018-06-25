@@ -4,10 +4,19 @@ import { PropsWithTheme } from '../../../utils/styledHelpers';
 import InfoIcon from './img/info.svg';
 import TriangleIcon from './img/triangle.svg';
 
+import { getItem, setItem } from '../../../utils/localStorage';
+
 export interface INoteProps {
-  children: JSX.Element | string;
-  hideActionName: string;
-  showActionName: string;
+  readonly children: JSX.Element | string;
+  readonly hideActionName: string;
+  readonly showActionName: string;
+  readonly storageKey?: string;
+  readonly isDefaultOpen?: boolean;
+  readonly isOpen?: boolean;
+  readonly onToggle?: (
+    isOpen: boolean,
+    e: React.MouseEvent<HTMLElement>
+  ) => void;
 }
 
 interface INoteState {
@@ -21,9 +30,19 @@ interface ITriangleProps {
 export class Note extends React.PureComponent<INoteProps, INoteState> {
   public static displayName: string = 'Note';
 
-  public readonly state: INoteState = {
-    isOpen: true,
-  };
+  constructor(props: INoteProps) {
+    super(props);
+    const { storageKey, isDefaultOpen = true } = props;
+    if (storageKey) {
+      let isOpen = getItem(storageKey);
+      if (typeof isOpen !== 'boolean') {
+        isOpen = isDefaultOpen;
+      }
+      this.state = { isOpen };
+    } else {
+      this.state = { isOpen: isDefaultOpen };
+    }
+  }
 
   public render(): JSX.Element {
     const { hideActionName, showActionName, ...other } = this.props;
@@ -46,15 +65,34 @@ export class Note extends React.PureComponent<INoteProps, INoteState> {
     );
   }
 
-  private handleClick = () => {
-    this.setState({
-      isOpen: !this.state.isOpen,
-    });
+  public componentWillReceiveProps(nextProps: INoteProps): void {
+    if (
+      typeof nextProps.isOpen !== 'undefined' &&
+      nextProps.isOpen !== this.state.isOpen
+    ) {
+      const { storageKey } = this.props;
+      this.setState({ isOpen: nextProps.isOpen });
+      if (storageKey) {
+        setItem(storageKey, nextProps.isOpen);
+      }
+    }
+  }
+
+  private handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    const { storageKey } = this.props;
+    const newIsOpen = !this.state.isOpen;
+    this.setState({ isOpen: newIsOpen });
+    if (storageKey) {
+      setItem(storageKey, newIsOpen);
+    }
+    if (this.props.onToggle) {
+      this.props.onToggle(!this.state.isOpen, e);
+    }
   };
 }
 
 const Collapsible = styled<{ isOpen: boolean }, 'div'>('div')`
-  padding-top: 11px;
+  padding: 11px 0;
   display: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? 'block' : 'none')};
   border-bottom: 1px solid ${({ theme }: PropsWithTheme<{}>): string =>
     theme.colors.borderControlDefault};
