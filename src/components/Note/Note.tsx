@@ -62,7 +62,7 @@ export class Note extends React.PureComponent<INoteProps, INoteState> {
   }
 
   public render(): JSX.Element {
-    const { hideActionName, showActionName, ...other } = this.props;
+    const { hideActionName, showActionName, storageKey, ...other } = this.props;
     const { isOpen } = this.state;
     return (
       <div {...other}>
