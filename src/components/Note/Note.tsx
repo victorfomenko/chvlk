@@ -4,7 +4,10 @@ import { PropsWithTheme } from '../../../utils/styledHelpers';
 import InfoIcon from './img/info.svg';
 import TriangleIcon from './img/triangle.svg';
 
-import { getItem, setItem } from '../../../utils/localStorage';
+import {
+  getItem as localStorageGet,
+  setItem as localStorageSet,
+} from '../../../utils/localStorage';
 
 export interface INoteProps {
   readonly children: JSX.Element | string;
@@ -30,11 +33,25 @@ interface ITriangleProps {
 export class Note extends React.PureComponent<INoteProps, INoteState> {
   public static displayName: string = 'Note';
 
+  public static getDerivedStateFromProps(
+    props: INoteProps,
+    state: INoteState
+  ): { isOpen?: boolean } | null {
+    if (typeof props.isOpen !== 'undefined' && props.isOpen !== state.isOpen) {
+      const { storageKey } = props;
+      if (storageKey) {
+        localStorageSet(storageKey, props.isOpen);
+      }
+      return { isOpen: props.isOpen };
+    }
+    return null;
+  }
+
   constructor(props: INoteProps) {
     super(props);
     const { storageKey, isDefaultOpen = true } = props;
     if (storageKey) {
-      let isOpen = getItem(storageKey);
+      let isOpen = localStorageGet(storageKey);
       if (typeof isOpen !== 'boolean') {
         isOpen = isDefaultOpen;
       }
@@ -65,25 +82,12 @@ export class Note extends React.PureComponent<INoteProps, INoteState> {
     );
   }
 
-  public componentWillReceiveProps(nextProps: INoteProps): void {
-    if (
-      typeof nextProps.isOpen !== 'undefined' &&
-      nextProps.isOpen !== this.state.isOpen
-    ) {
-      const { storageKey } = this.props;
-      this.setState({ isOpen: nextProps.isOpen });
-      if (storageKey) {
-        setItem(storageKey, nextProps.isOpen);
-      }
-    }
-  }
-
   private handleClick = (e: React.MouseEvent<HTMLElement>) => {
     const { storageKey } = this.props;
     const newIsOpen = !this.state.isOpen;
     this.setState({ isOpen: newIsOpen });
     if (storageKey) {
-      setItem(storageKey, newIsOpen);
+      localStorageSet(storageKey, newIsOpen);
     }
     if (this.props.onToggle) {
       this.props.onToggle(!this.state.isOpen, e);

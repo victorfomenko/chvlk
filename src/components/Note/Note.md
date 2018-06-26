@@ -1,7 +1,7 @@
 Note documentation here...
 
 ```
-<Note hideActionName="Help" showActionName="Help">
+<Note hideActionName="Help" showActionName="Help" storageKey="kek">
   <p>Regular payments are processed twice a month for all affiliates:</p>
   <ul>
     <li>During the first 3 business days of the month;</li>
