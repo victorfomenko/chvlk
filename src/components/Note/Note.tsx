@@ -85,13 +85,18 @@ export class Note extends React.PureComponent<INoteProps, INoteState> {
   private handleClick = (e: React.MouseEvent<HTMLElement>) => {
     const { storageKey } = this.props;
     const newIsOpen = !this.state.isOpen;
-    this.setState({ isOpen: newIsOpen });
-    if (storageKey) {
-      localStorageSet(storageKey, newIsOpen);
-    }
     if (this.props.onToggle) {
-      this.props.onToggle(!this.state.isOpen, e);
+      e.persist();
     }
+
+    this.setState({ isOpen: newIsOpen }, () => {
+      if (storageKey) {
+        localStorageSet(storageKey, newIsOpen);
+      }
+      if (this.props.onToggle) {
+        this.props.onToggle(!this.state.isOpen, e);
+      }
+    });
   };
 }
 
